@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk+" version="2.24"/>
+  <!-- interface-naming-policy project-wide -->
+  <object class="GtkFileFilter" id="csv_filefilter"/>
+  <object class="GtkFrame" id="main_tab">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="label_xalign">0</property>
+    <property name="shadow_type">none</property>
+    <child>
+      <object class="GtkVBox" id="vbox4">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <child>
+          <object class="GtkHBox" id="hbox4">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="spacing">5</property>
+            <child>
+              <object class="GtkLabel" id="label22">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">CiviCRM CSV File</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkFileChooserButton" id="members_import_filechooser">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="filter">csv_filefilter</property>
+                <property name="title" translatable="yes">Select CiViCRM CSV File</property>
+                <signal name="file-set" handler="on_members_file_set" swapped="no"/>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="padding">5</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkFrame" id="frame5">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label_xalign">0</property>
+            <property name="shadow_type">none</property>
+            <child>
+              <object class="GtkTable" id="table3">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="n_rows">5</property>
+                <property name="n_columns">2</property>
+                <child>
+                  <object class="GtkLabel" id="label24">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">ID</property>
+                  </object>
+                  <packing>
+                    <property name="x_options">GTK_FILL</property>
+                    <property name="y_options"></property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="label25">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Name</property>
+                  </object>
+                  <packing>
+                    <property name="top_attach">1</property>
+                    <property name="bottom_attach">2</property>
+                    <property name="x_options">GTK_FILL</property>
+                    <property name="y_options"></property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="label26">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Accountholder</property>
+                  </object>
+                  <packing>
+                    <property name="top_attach">2</property>
+                    <property name="bottom_attach">3</property>
+                    <property name="x_options">GTK_FILL</property>
+                    <property name="y_options"></property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="label27">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Accountnumber</property>
+                  </object>
+                  <packing>
+                    <property name="top_attach">3</property>
+                    <property name="bottom_attach">4</property>
+                    <property name="x_options">GTK_FILL</property>
+                    <property name="y_options"></property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="label28">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Allow Incasso</property>
+                  </object>
+                  <packing>
+                    <property name="top_attach">4</property>
+                    <property name="bottom_attach">5</property>
+                    <property name="x_options">GTK_FILL</property>
+                    <property name="y_options"></property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkComboBox" id="members_id_combo">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="model">members_field_model</property>
+                    <child>
+                      <object class="GtkCellRendererText" id="cellrenderertext7"/>
+                      <attributes>
+                        <attribute name="text">0</attribute>
+                      </attributes>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="left_attach">1</property>
+                    <property name="right_attach">2</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkComboBox" id="members_name_combo">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="model">members_field_model</property>
+                    <child>
+                      <object class="GtkCellRendererText" id="cellrenderertext8"/>
+                      <attributes>
+                        <attribute name="text">0</attribute>
+                      </attributes>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="left_attach">1</property>
+                    <property name="right_attach">2</property>
+                    <property name="top_attach">1</property>
+                    <property name="bottom_attach">2</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkComboBox" id="members_accountholder_combo">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="model">members_field_model</property>
+                    <child>
+                      <object class="GtkCellRendererText" id="cellrenderertext9"/>
+                      <attributes>
+                        <attribute name="text">0</attribute>
+                      </attributes>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="left_attach">1</property>
+                    <property name="right_attach">2</property>
+                    <property name="top_attach">2</property>
+                    <property name="bottom_attach">3</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkComboBox" id="members_accountnumber_combo">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="model">members_field_model</property>
+                    <child>
+                      <object class="GtkCellRendererText" id="cellrenderertext10"/>
+                      <attributes>
+                        <attribute name="text">0</attribute>
+                      </attributes>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="left_attach">1</property>
+                    <property name="right_attach">2</property>
+                    <property name="top_attach">3</property>
+                    <property name="bottom_attach">4</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkComboBox" id="members_incasso_combo">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="model">members_field_model</property>
+                    <child>
+                      <object class="GtkCellRendererText" id="cellrenderertext11"/>
+                      <attributes>
+                        <attribute name="text">0</attribute>
+                      </attributes>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="left_attach">1</property>
+                    <property name="right_attach">2</property>
+                    <property name="top_attach">4</property>
+                    <property name="bottom_attach">5</property>
+                  </packing>
+                </child>
+              </object>
+            </child>
+            <child type="label">
+              <object class="GtkLabel" id="label23">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">&lt;b&gt;Fields&lt;/b&gt;</property>
+                <property name="use_markup">True</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="button4">
+            <property name="label" translatable="yes">Import members</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="use_action_appearance">False</property>
+            <signal name="clicked" handler="on_members_import" swapped="no"/>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">2</property>
+          </packing>
+        </child>
+        <child>
+          <placeholder/>
+        </child>
+      </object>
+    </child>
+    <child type="label_item">
+      <placeholder/>
+    </child>
+  </object>
+  <object class="GtkListStore" id="members_field_model">
+    <columns>
+      <!-- column-name Field -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
+</interface>

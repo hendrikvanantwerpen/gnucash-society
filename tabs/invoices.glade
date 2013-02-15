@@ -1,0 +1,556 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk+" version="2.24"/>
+  <!-- interface-naming-policy project-wide -->
+  <object class="GtkListStore" id="invoices_accounts_model">
+    <columns>
+      <!-- column-name Account -->
+      <column type="PyObject"/>
+      <!-- column-name Name -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
+  <object class="GtkListStore" id="invoices_customers_model">
+    <columns>
+      <!-- column-name Customer -->
+      <column type="PyObject"/>
+      <!-- column-name Include -->
+      <column type="gboolean"/>
+      <!-- column-name Name -->
+      <column type="gchararray"/>
+      <!-- column-name Invoice -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
+  <object class="GtkCheckButton" id="invoices_customers_selector">
+    <property name="visible">True</property>
+    <property name="can_focus">True</property>
+    <property name="receives_default">False</property>
+    <property name="use_action_appearance">False</property>
+    <property name="draw_indicator">True</property>
+    <child>
+      <placeholder/>
+    </child>
+  </object>
+  <object class="GtkListStore" id="invoices_lines_model">
+    <columns>
+      <!-- column-name Tax -->
+      <column type="PyObject"/>
+      <!-- column-name Description -->
+      <column type="gchararray"/>
+      <!-- column-name Amount -->
+      <column type="glong"/>
+      <!-- column-name Price -->
+      <column type="gdouble"/>
+      <!-- column-name Subtotal -->
+      <column type="gdouble"/>
+      <!-- column-name TaxName -->
+      <column type="gchararray"/>
+      <!-- column-name TaxIncl -->
+      <column type="gboolean"/>
+      <!-- column-name AccountName -->
+      <column type="gchararray"/>
+      <!-- column-name Account -->
+      <column type="PyObject"/>
+    </columns>
+  </object>
+  <object class="GtkListStore" id="invoices_taxes_model">
+    <columns>
+      <!-- column-name Tax -->
+      <column type="PyObject"/>
+      <!-- column-name Description -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
+  <object class="GtkFrame" id="main_tab">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="label_xalign">0</property>
+    <property name="shadow_type">none</property>
+    <child>
+      <object class="GtkVBox" id="vbox5">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <child>
+          <object class="GtkFrame" id="frame4">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label_xalign">0</property>
+            <property name="shadow_type">none</property>
+            <child>
+              <object class="GtkHBox" id="hbox5">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="spacing">5</property>
+                <child>
+                  <object class="GtkTable" id="table5">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="n_rows">4</property>
+                    <property name="n_columns">2</property>
+                    <child>
+                      <object class="GtkLabel" id="label35">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="xalign">0</property>
+                        <property name="label" translatable="yes">ID base</property>
+                      </object>
+                      <packing>
+                        <property name="x_options">GTK_FILL</property>
+                        <property name="y_options"></property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="label36">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="xalign">0</property>
+                        <property name="label" translatable="yes">ID Start No</property>
+                      </object>
+                      <packing>
+                        <property name="top_attach">1</property>
+                        <property name="bottom_attach">2</property>
+                        <property name="x_options">GTK_FILL</property>
+                        <property name="y_options"></property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="label37">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="xalign">0</property>
+                        <property name="label" translatable="yes">Date</property>
+                      </object>
+                      <packing>
+                        <property name="top_attach">2</property>
+                        <property name="bottom_attach">3</property>
+                        <property name="x_options">GTK_FILL</property>
+                        <property name="y_options"></property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkEntry" id="invoices_baseid_entry">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="invisible_char">•</property>
+                        <property name="invisible_char_set">True</property>
+                        <property name="primary_icon_activatable">False</property>
+                        <property name="secondary_icon_activatable">False</property>
+                        <property name="primary_icon_sensitive">True</property>
+                        <property name="secondary_icon_sensitive">True</property>
+                        <signal name="focus-out-event" handler="on_id_change" swapped="no"/>
+                      </object>
+                      <packing>
+                        <property name="left_attach">1</property>
+                        <property name="right_attach">2</property>
+                        <property name="x_options"></property>
+                        <property name="y_options"></property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkEntry" id="invoices_startno_entry">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="invisible_char">•</property>
+                        <property name="invisible_char_set">True</property>
+                        <property name="primary_icon_activatable">False</property>
+                        <property name="secondary_icon_activatable">False</property>
+                        <property name="primary_icon_sensitive">True</property>
+                        <property name="secondary_icon_sensitive">True</property>
+                        <signal name="focus-out-event" handler="on_id_change" swapped="no"/>
+                      </object>
+                      <packing>
+                        <property name="left_attach">1</property>
+                        <property name="right_attach">2</property>
+                        <property name="top_attach">1</property>
+                        <property name="bottom_attach">2</property>
+                        <property name="x_options"></property>
+                        <property name="y_options"></property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkEntry" id="invoices_date">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="invisible_char">•</property>
+                        <property name="invisible_char_set">True</property>
+                        <property name="primary_icon_activatable">False</property>
+                        <property name="secondary_icon_activatable">False</property>
+                        <property name="primary_icon_sensitive">True</property>
+                        <property name="secondary_icon_sensitive">True</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">1</property>
+                        <property name="right_attach">2</property>
+                        <property name="top_attach">2</property>
+                        <property name="bottom_attach">3</property>
+                        <property name="x_options"></property>
+                        <property name="y_options"></property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="label39">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="xalign">0</property>
+                        <property name="label" translatable="yes">Description</property>
+                      </object>
+                      <packing>
+                        <property name="top_attach">3</property>
+                        <property name="bottom_attach">4</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkEntry" id="invoices_description">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="invisible_char">•</property>
+                        <property name="invisible_char_set">True</property>
+                        <property name="primary_icon_activatable">False</property>
+                        <property name="secondary_icon_activatable">False</property>
+                        <property name="primary_icon_sensitive">True</property>
+                        <property name="secondary_icon_sensitive">True</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">1</property>
+                        <property name="right_attach">2</property>
+                        <property name="top_attach">3</property>
+                        <property name="bottom_attach">4</property>
+                      </packing>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">False</property>
+                    <property name="padding">5</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkFrame" id="frame11">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label_xalign">0</property>
+                    <property name="shadow_type">none</property>
+                    <child>
+                      <object class="GtkTextView" id="invoices_notes_text">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                      </object>
+                    </child>
+                    <child type="label">
+                      <object class="GtkLabel" id="label38">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="label" translatable="yes">Notes</property>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">True</property>
+                    <property name="fill">True</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+              </object>
+            </child>
+            <child type="label">
+              <object class="GtkLabel" id="label29">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">&lt;b&gt;Invoice Info&lt;/b&gt;</property>
+                <property name="use_markup">True</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkFrame" id="frame6">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label_xalign">0</property>
+            <property name="shadow_type">none</property>
+            <child>
+              <object class="GtkScrolledWindow" id="scrolledwindow3">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="hscrollbar_policy">automatic</property>
+                <property name="vscrollbar_policy">automatic</property>
+                <child>
+                  <object class="GtkTreeView" id="invoices_lines">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="model">invoices_lines_model</property>
+                    <property name="headers_clickable">False</property>
+                    <property name="search_column">1</property>
+                    <signal name="key-release-event" handler="on_invoices_lines_key_event" swapped="no"/>
+                    <child>
+                      <object class="GtkTreeViewColumn" id="treeviewcolumn3">
+                        <property name="resizable">True</property>
+                        <property name="title" translatable="yes">Description</property>
+                        <property name="expand">True</property>
+                        <property name="clickable">True</property>
+                        <property name="sort_column_id">1</property>
+                        <child>
+                          <object class="GtkCellRendererText" id="cellrenderertext13">
+                            <property name="editable">True</property>
+                            <signal name="edited" handler="on_invoices_line_desc_changed" swapped="no"/>
+                          </object>
+                          <attributes>
+                            <attribute name="text">1</attribute>
+                          </attributes>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkTreeViewColumn" id="treeviewcolumn6">
+                        <property name="resizable">True</property>
+                        <property name="title" translatable="yes">Amount</property>
+                        <property name="clickable">True</property>
+                        <property name="sort_column_id">2</property>
+                        <child>
+                          <object class="GtkCellRendererText" id="cellrenderertext14">
+                            <property name="editable">True</property>
+                            <signal name="edited" handler="on_invoices_line_amount_changed" swapped="no"/>
+                          </object>
+                          <attributes>
+                            <attribute name="text">2</attribute>
+                          </attributes>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkTreeViewColumn" id="treeviewcolumn7">
+                        <property name="resizable">True</property>
+                        <property name="title" translatable="yes">Price</property>
+                        <property name="clickable">True</property>
+                        <property name="sort_column_id">3</property>
+                        <child>
+                          <object class="GtkCellRendererText" id="cellrenderertext15">
+                            <property name="editable">True</property>
+                            <signal name="edited" handler="on_invoices_line_price_changed" swapped="no"/>
+                          </object>
+                          <attributes>
+                            <attribute name="text">3</attribute>
+                          </attributes>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkTreeViewColumn" id="treeviewcolumn10">
+                        <property name="title" translatable="yes">Account</property>
+                        <property name="clickable">True</property>
+                        <property name="sort_column_id">7</property>
+                        <child>
+                          <object class="GtkCellRendererCombo" id="cellrenderercombo3">
+                            <property name="editable">True</property>
+                            <property name="has_entry">False</property>
+                            <property name="model">invoices_accounts_model</property>
+                            <property name="text_column">1</property>
+                            <signal name="changed" handler="on_invoice_line_account_changed" swapped="no"/>
+                          </object>
+                          <attributes>
+                            <attribute name="text">7</attribute>
+                          </attributes>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkTreeViewColumn" id="treeviewcolumn8">
+                        <property name="resizable">True</property>
+                        <property name="title" translatable="yes">Subtotal</property>
+                        <property name="clickable">True</property>
+                        <property name="sort_column_id">4</property>
+                        <child>
+                          <object class="GtkCellRendererText" id="cellrenderertext16"/>
+                          <attributes>
+                            <attribute name="text">4</attribute>
+                          </attributes>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkTreeViewColumn" id="treeviewcolumn5">
+                        <property name="resizable">True</property>
+                        <property name="title" translatable="yes">Tax</property>
+                        <property name="clickable">True</property>
+                        <property name="sort_column_id">5</property>
+                        <child>
+                          <object class="GtkCellRendererCombo" id="cellrenderercombo2">
+                            <property name="editable">True</property>
+                            <property name="has_entry">False</property>
+                            <property name="model">invoices_taxes_model</property>
+                            <property name="text_column">1</property>
+                            <signal name="changed" handler="on_invoices_line_tax_changed" swapped="no"/>
+                          </object>
+                          <attributes>
+                            <attribute name="text">5</attribute>
+                          </attributes>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkTreeViewColumn" id="treeviewcolumn4">
+                        <property name="resizable">True</property>
+                        <property name="title" translatable="yes">Incl?</property>
+                        <child>
+                          <object class="GtkCellRendererToggle" id="cellrenderertoggle3">
+                            <signal name="toggled" handler="on_invoices_line_taxincl_changed" swapped="no"/>
+                          </object>
+                          <attributes>
+                            <attribute name="active">6</attribute>
+                          </attributes>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child type="label">
+              <object class="GtkLabel" id="label30">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">&lt;b&gt;Invoice Lines&lt;/b&gt;</property>
+                <property name="use_markup">True</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">True</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkFrame" id="frame7">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label_xalign">0</property>
+            <property name="shadow_type">none</property>
+            <child>
+              <object class="GtkVBox" id="vbox7">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <child>
+                  <object class="GtkScrolledWindow" id="scrolledwindow1">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="hscrollbar_policy">automatic</property>
+                    <property name="vscrollbar_policy">automatic</property>
+                    <child>
+                      <object class="GtkTreeView" id="invoices_customers_list">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="model">invoices_customers_model</property>
+                        <property name="headers_clickable">False</property>
+                        <property name="search_column">1</property>
+                        <child>
+                          <object class="GtkTreeViewColumn" id="treeviewcolumn1">
+                            <property name="clickable">True</property>
+                            <property name="widget">invoices_customers_selector</property>
+                            <signal name="clicked" handler="on_invoices_customers_selectall" swapped="no"/>
+                            <child>
+                              <object class="GtkCellRendererToggle" id="cellrenderertoggle2">
+                                <signal name="toggled" handler="on_invoices_customer_select" swapped="no"/>
+                              </object>
+                              <attributes>
+                                <attribute name="active">1</attribute>
+                              </attributes>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkTreeViewColumn" id="treeviewcolumn2">
+                            <property name="resizable">True</property>
+                            <property name="title" translatable="yes">Name</property>
+                            <property name="expand">True</property>
+                            <child>
+                              <object class="GtkCellRendererText" id="cellrenderertext12"/>
+                              <attributes>
+                                <attribute name="text">2</attribute>
+                              </attributes>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkTreeViewColumn" id="treeviewcolumn9">
+                            <property name="resizable">True</property>
+                            <property name="title" translatable="yes">Invoice ID</property>
+                            <child>
+                              <object class="GtkCellRendererText" id="cellrenderertext17"/>
+                              <attributes>
+                                <attribute name="text">3</attribute>
+                              </attributes>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">True</property>
+                    <property name="fill">True</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkCheckButton" id="checkbutton1">
+                    <property name="label" translatable="yes">Only show selected customers</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">False</property>
+                    <property name="use_action_appearance">False</property>
+                    <property name="draw_indicator">True</property>
+                    <signal name="toggled" handler="on_invoices_customers_filter" swapped="no"/>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">False</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+              </object>
+            </child>
+            <child type="label">
+              <object class="GtkLabel" id="label31">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">&lt;b&gt;Customers&lt;/b&gt;</property>
+                <property name="use_markup">True</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">True</property>
+            <property name="fill">True</property>
+            <property name="position">2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="button5">
+            <property name="label" translatable="yes">Generate Invoices</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="use_action_appearance">False</property>
+            <signal name="clicked" handler="on_invoices_generate" swapped="no"/>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
+            <property name="position">3</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+    <child type="label_item">
+      <placeholder/>
+    </child>
+  </object>
+</interface>

@@ -1,0 +1,464 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk+" version="2.24"/>
+  <!-- interface-naming-policy project-wide -->
+  <object class="GtkFrame" id="main_tab">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="label_xalign">0</property>
+    <property name="shadow_type">none</property>
+    <child>
+      <object class="GtkVBox" id="vbox3">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="spacing">5</property>
+        <child>
+          <object class="GtkFrame" id="frame2">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label_xalign">0</property>
+            <property name="shadow_type">none</property>
+            <child>
+              <object class="GtkTable" id="table4">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="n_rows">3</property>
+                <property name="n_columns">2</property>
+                <child>
+                  <object class="GtkLabel" id="label8">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Start date</property>
+                  </object>
+                  <packing>
+                    <property name="x_options">GTK_FILL</property>
+                    <property name="y_options"></property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="label9">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="xalign">0</property>
+                    <property name="label" translatable="yes">End date</property>
+                  </object>
+                  <packing>
+                    <property name="top_attach">1</property>
+                    <property name="bottom_attach">2</property>
+                    <property name="x_options">GTK_FILL</property>
+                    <property name="y_options"></property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="taxes_start_entry">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="invisible_char">•</property>
+                    <property name="invisible_char_set">True</property>
+                    <property name="primary_icon_activatable">False</property>
+                    <property name="secondary_icon_activatable">False</property>
+                    <property name="primary_icon_sensitive">True</property>
+                    <property name="secondary_icon_sensitive">True</property>
+                  </object>
+                  <packing>
+                    <property name="left_attach">1</property>
+                    <property name="right_attach">2</property>
+                    <property name="x_options">GTK_FILL</property>
+                    <property name="y_options"></property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="taxes_end_entry">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="invisible_char">•</property>
+                    <property name="invisible_char_set">True</property>
+                    <property name="primary_icon_activatable">False</property>
+                    <property name="secondary_icon_activatable">False</property>
+                    <property name="primary_icon_sensitive">True</property>
+                    <property name="secondary_icon_sensitive">True</property>
+                  </object>
+                  <packing>
+                    <property name="left_attach">1</property>
+                    <property name="right_attach">2</property>
+                    <property name="top_attach">1</property>
+                    <property name="bottom_attach">2</property>
+                    <property name="x_options">GTK_FILL</property>
+                    <property name="y_options"></property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton" id="button3">
+                    <property name="label" translatable="yes">Update taxes</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <property name="use_action_appearance">False</property>
+                    <signal name="clicked" handler="on_taxes_update" swapped="no"/>
+                  </object>
+                  <packing>
+                    <property name="left_attach">1</property>
+                    <property name="right_attach">2</property>
+                    <property name="top_attach">2</property>
+                    <property name="bottom_attach">3</property>
+                    <property name="x_options">GTK_FILL</property>
+                    <property name="y_options"></property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkFrame" id="frame3">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label_xalign">0</property>
+                    <property name="shadow_type">none</property>
+                    <child>
+                      <placeholder/>
+                    </child>
+                    <child type="label_item">
+                      <placeholder/>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="top_attach">2</property>
+                    <property name="bottom_attach">3</property>
+                    <property name="x_options"></property>
+                    <property name="y_options"></property>
+                  </packing>
+                </child>
+              </object>
+            </child>
+            <child type="label">
+              <object class="GtkLabel" id="label7">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">&lt;b&gt;Tax Period&lt;/b&gt;</property>
+                <property name="use_markup">True</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
+            <property name="padding">5</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLayout" id="layout1">
+            <property name="height_request">250</property>
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="height">250</property>
+            <child>
+              <object class="GtkLabel" id="label10">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">&lt;b&gt;BTW Declaration Info&lt;/b&gt;</property>
+                <property name="use_markup">True</property>
+              </object>
+              <packing>
+                <property name="x">10</property>
+                <property name="y">10</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label11">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">&lt;b&gt;EU BTW Info&lt;/b&gt; (apply for restitution manually)</property>
+                <property name="use_markup">True</property>
+              </object>
+              <packing>
+                <property name="x">10</property>
+                <property name="y">190</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label12">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="xalign">0</property>
+                <property name="label" translatable="yes">1a. Leveringen/diensten belast met 19%</property>
+              </object>
+              <packing>
+                <property name="x">30</property>
+                <property name="y">40</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label13">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">1b. Leveringen/diensten belast met 6%</property>
+              </object>
+              <packing>
+                <property name="x">30</property>
+                <property name="y">65</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label14">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">4b. Leveringen/diensten uit landen binnen de EU</property>
+              </object>
+              <packing>
+                <property name="x">30</property>
+                <property name="y">90</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label15">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">BTW Paid in other EU countries</property>
+              </object>
+              <packing>
+                <property name="x">30</property>
+                <property name="y">215</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="taxes_btw_hoog_label">
+                <property name="width_request">100</property>
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="xalign">1</property>
+                <property name="label" translatable="yes">€ -</property>
+                <property name="justify">right</property>
+              </object>
+              <packing>
+                <property name="x">400</property>
+                <property name="y">40</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="taxes_btw_laag_label">
+                <property name="width_request">100</property>
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="xalign">1</property>
+                <property name="label" translatable="yes">€ -</property>
+                <property name="justify">right</property>
+              </object>
+              <packing>
+                <property name="x">400</property>
+                <property name="y">65</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="taxes_btw_import_label">
+                <property name="width_request">100</property>
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="xalign">1</property>
+                <property name="label" translatable="yes">€ -</property>
+                <property name="justify">right</property>
+              </object>
+              <packing>
+                <property name="x">400</property>
+                <property name="y">90</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="taxes_btw_eu_label">
+                <property name="width_request">100</property>
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="xalign">1</property>
+                <property name="label" translatable="yes">€ -</property>
+                <property name="justify">right</property>
+              </object>
+              <packing>
+                <property name="x">400</property>
+                <property name="y">215</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label16">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">5b. Voorbelasting</property>
+              </object>
+              <packing>
+                <property name="x">30</property>
+                <property name="y">115</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="taxes_voorbelasting_label">
+                <property name="width_request">100</property>
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="xalign">1</property>
+                <property name="label" translatable="yes">€ -</property>
+                <property name="justify">right</property>
+              </object>
+              <packing>
+                <property name="x">400</property>
+                <property name="y">115</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="taxes_btw_total_label">
+                <property name="width_request">100</property>
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="xalign">1</property>
+                <property name="label" translatable="yes">€ -</property>
+                <property name="justify">right</property>
+                <attributes>
+                  <attribute name="weight" value="bold"/>
+                </attributes>
+              </object>
+              <packing>
+                <property name="x">400</property>
+                <property name="y">140</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label18">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">Totaal</property>
+                <attributes>
+                  <attribute name="weight" value="bold"/>
+                </attributes>
+              </object>
+              <packing>
+                <property name="x">30</property>
+                <property name="y">140</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkFrame" id="frame10">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label_xalign">0</property>
+            <property name="shadow_type">none</property>
+            <child>
+              <object class="GtkHBox" id="hbox2">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="spacing">5</property>
+                <child>
+                  <object class="GtkLabel" id="label34">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">Tax Declaration Filename</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">False</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEntry" id="taxes_reportfile_entry">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="invisible_char">•</property>
+                    <property name="invisible_char_set">True</property>
+                    <property name="primary_icon_activatable">False</property>
+                    <property name="secondary_icon_activatable">False</property>
+                    <property name="primary_icon_sensitive">True</property>
+                    <property name="secondary_icon_sensitive">True</property>
+                  </object>
+                  <packing>
+                    <property name="expand">True</property>
+                    <property name="fill">True</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton" id="button2">
+                    <property name="label" translatable="yes">...</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <property name="use_action_appearance">False</property>
+                    <signal name="clicked" handler="on_taxreport_file_select" swapped="no"/>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">False</property>
+                    <property name="position">2</property>
+                  </packing>
+                </child>
+              </object>
+            </child>
+            <child type="label">
+              <object class="GtkLabel" id="label17">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">&lt;b&gt;Tax Declaration&lt;/b&gt;</property>
+                <property name="use_markup">True</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkHBox" id="hbox6">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="spacing">5</property>
+            <property name="homogeneous">True</property>
+            <child>
+              <object class="GtkButton" id="button1">
+                <property name="label" translatable="yes">Create Tax Declaration Transaction</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_action_appearance">False</property>
+                <signal name="clicked" handler="on_taxes_create_transaction" swapped="no"/>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="button6">
+                <property name="label" translatable="yes">Save Tax Declaration Report</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_action_appearance">False</property>
+                <signal name="clicked" handler="on_taxes_save_report" swapped="no"/>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">3</property>
+          </packing>
+        </child>
+        <child>
+          <placeholder/>
+        </child>
+      </object>
+    </child>
+    <child type="label_item">
+      <placeholder/>
+    </child>
+  </object>
+</interface>
