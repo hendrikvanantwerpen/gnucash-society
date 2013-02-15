@@ -31,12 +31,9 @@ __dir__ = os.path.dirname(os.path.abspath(__file__))
 
 import sys
 import gobject
-import gconf
+import gtk
 
-GCONF_ROOT = '/apps/gcsociety/finances'
-
-import gnucash_provider
-
+from conf import Conf
 from gcmods import *
 from gcmods.accounting import Accounting
 from gcmods.transactions import Unreconciled
@@ -46,31 +43,30 @@ from gtkmods.dialogs import *
 
 import tabs
 
-class GCSocietyApp:       
+class GCSocietyApp:
 
-    GNUCASH_KEY = GCONF_ROOT + '/gnucash_filename'
-    WINDOW_W_KEY = GCONF_ROOT + '/window/width'
-    WINDOW_H_KEY = GCONF_ROOT + '/window/height'
-    ACCOUNTHOLDER_KEY = GCONF_ROOT + '/bank/accountholder'
-    ACCOUNTNUMBER_KEY = GCONF_ROOT + '/bank/accountnumber'
+    CONF_ROOT = '/apps/gcsociety'
+    WINDOW_W_KEY = '/window/width'
+    WINDOW_H_KEY = '/window/height'
+    ACCOUNTHOLDER_KEY = '/bank/accountholder'
+    ACCOUNTNUMBER_KEY = '/bank/accountnumber'
 
     DATE_FMT = '%Y-%m-%d'
 
     accountholder = None
     accounting = None
     accountnumber = None
-    vendors = None
 
-    def __init__(self):
-        self.init_conf()
+    def __init__(self,conf,filename):
+        self.app_conf = conf
+        self.file_conf = conf.get_child('/'+self.key_from_filename(filename))
+        self.gnucash_filename = filename
         self.init_gui()
         self.init_tabs()
-        self.gnucash_filename_changed()
+        self.init_gnucash()
 
-    def init_conf(self):
-        self.conf = gconf.client_get_default()
-        self.conf.add_dir(GCONF_ROOT, gconf.CLIENT_PRELOAD_NONE)
-        self.conf.notify_add(GCONF_ROOT, self.on_conf_change)
+    def key_from_filename(self,filename):
+        return filename.replace('/','-').replace('\\','-').replace(' ','_')
 
     def init_gui(self):
         builder = gtk.Builder()
@@ -83,8 +79,8 @@ class GCSocietyApp:
 
         self.init_settings(builder)
 
-        w = self.conf.get_int(GCSocietyApp.WINDOW_W_KEY)
-        h = self.conf.get_int(GCSocietyApp.WINDOW_H_KEY)
+        w = self.app_conf.get_int(GCSocietyApp.WINDOW_W_KEY)
+        h = self.app_conf.get_int(GCSocietyApp.WINDOW_H_KEY)
         if w and h:
             self.window.resize(w,h)
         self.window.show()
@@ -105,43 +101,54 @@ class GCSocietyApp:
     ####################
 
     def init_settings(self,builder):
-        gff = builder.get_object('gnucash_filefilter')
-        gff.set_name("GnuCash Files (*.gnucash)")
-        gff.add_pattern('*.gnucash')
+        self.file_conf.on_add(self.on_settings_change)
 
-        filename = self.conf.get_string(GCSocietyApp.GNUCASH_KEY)
-        gnucash_filechooser = builder.get_object('gnucash_filechooser')
-        self.gnucash_filename = showOpenDialog(title="Open GnuCash file", filter='*.gnucash', filename=filename) or ''
-        gnucash_filechooser.set_filename(self.gnucash_filename)
-
-        self.accountholder = self.conf.get_string(GCSocietyApp.ACCOUNTHOLDER_KEY)
+        self.accountholder = self.file_conf.get_string(GCSocietyApp.ACCOUNTHOLDER_KEY)
         ahe = builder.get_object('bank_accountholder_entry')
         ahe.set_text(self.accountholder or '')
 
-        self.accountnumber = self.conf.get_int(GCSocietyApp.ACCOUNTNUMBER_KEY)
+        self.accountnumber = self.file_conf.get_int(GCSocietyApp.ACCOUNTNUMBER_KEY)
         ane = builder.get_object('bank_accountnumber_entry')
         ane.set_text( ( self.accountnumber and str(self.accountnumber) ) or '')
 
-    def gnucash_filename_changed(self):
+    def on_bank_accountholder_changed(self,entry):
+        self.file_conf.set_string(GCSocietyApp.ACCOUNTHOLDER_KEY,entry.get_text())
+
+    def on_bank_accountnumber_changed(self,entry):
+        try:
+            num = int(entry.get_text())
+            self.file_conf.set_int(GCSocietyApp.ACCOUNTNUMBER_KEY,num)
+        except:
+            entry.set_text('')
+
+    def on_settings_change(self, key, value):
+        if key == GCSocietyApp.ACCOUNTHOLDER_KEY:
+            self.accountholder = value.get_string()
+        elif key == GCSocietyApp.ACCOUNTNUMBER_KEY:
+            self.accountnumber = value.get_int()
+        else:
+            print 'unhandled conf change %s -> %s' % (key,value)
+
+    ##############
+    # Open GnuCash 
+    ##############
+
+    def init_gnucash(self):
         self.accounting = None
         self.payables = None
         self.receivables = None
-        if self.gnucash_filename:
-            self.set_status_text("Using %s" %
-                    os.path.basename(self.gnucash_filename))
-            try:
-                self.accounting = Accounting(self.gnucash_filename)
-            except Exception as ex:
-                showErrorMessage("Cannot load %s: %s" % (self.gnucash_filename,ex))
-                self.gnucash_filename = None
-                self.accounting = None
-            else:
-                self.payables = Unreconciled(self.accounting,
-                        Unreconciled.Type.PAYABLES)
-                self.receivables = Unreconciled(self.accounting,
-                        Unreconciled.Type.RECEIVABLES)
+        self.set_status_text("Using %s" %
+                os.path.basename(self.gnucash_filename))
+        try:
+            self.accounting = Accounting(self.gnucash_filename)
+        except Exception as ex:
+            showErrorMessage("Cannot load %s: %s" % (self.gnucash_filename,ex))
+            self.window.destroy()
         else:
-            self.set_status_text("No GnuCash file selected. Go to settings to fix this.")
+            self.payables = Unreconciled(self.accounting,
+                    Unreconciled.Type.PAYABLES)
+            self.receivables = Unreconciled(self.accounting,
+                    Unreconciled.Type.RECEIVABLES)
         self.update_contacts()
         self.refresh()
 
@@ -153,32 +160,6 @@ class GCSocietyApp:
         else:
             self.customers = []
             self.vendors = []
-
-    def on_gnucash_file_set(self,fc):
-        self.conf.set_string(GCSocietyApp.GNUCASH_KEY,fc.get_filename())
-
-    def on_bank_accountholder_changed(self,entry):
-        self.conf.set_string(GCSocietyApp.ACCOUNTHOLDER_KEY,entry.get_text())
-
-    def on_bank_accountnumber_changed(self,entry):
-        try:
-            num = int(entry.get_text())
-            self.conf.set_int(GCSocietyApp.ACCOUNTNUMBER_KEY,num)
-        except:
-            entry.set_text('')
-
-    def on_conf_change(self, conf, timestamp, entry, *extra):
-        key = entry.get_key()
-        value = entry.get_value()
-        if key == GCSocietyApp.GNUCASH_KEY:
-            self.gnucash_filename = value.get_string()
-            self.gnucash_filename_changed()
-        elif key == GCSocietyApp.ACCOUNTHOLDER_KEY:
-            self.accountholder = value.get_string()
-        elif key == GCSocietyApp.ACCOUNTNUMBER_KEY:
-            self.accountnumber = value.get_int()
-        else:
-            print 'unhandled conf change %s -> %s' % (key,value)
 
     ####################################
     # Window and configuration functions
@@ -200,8 +181,8 @@ class GCSocietyApp:
 
     def on_window_destroy(self,evt):
         size = self.window.allocation
-        self.conf.set_int(GCSocietyApp.WINDOW_W_KEY,size.width)
-        self.conf.set_int(GCSocietyApp.WINDOW_H_KEY,size.height)
+        self.app_conf.set_int(GCSocietyApp.WINDOW_W_KEY,size.width)
+        self.app_conf.set_int(GCSocietyApp.WINDOW_H_KEY,size.height)
         if self.accounting:
             self.accounting.session.end()
         gtk.main_quit()
@@ -209,7 +190,3 @@ class GCSocietyApp:
     def set_status_text(self,text):
         cid = self.statusbar.get_context_id('default')
         self.statusbar.push(cid,text)
-
-if __name__ == '__main__':
-    app = GCSocietyApp()
-    gtk.main()

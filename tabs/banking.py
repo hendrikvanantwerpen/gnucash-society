@@ -31,7 +31,7 @@ __dir__ = os.path.dirname(os.path.abspath(__file__))
 
 from datetime import date, datetime
 
-from gcsociety import GCSocietyApp
+from gcsociety import *
 
 from mods import *
 from mods.enum import enum
@@ -274,16 +274,6 @@ class BankingTab:
             for txn in self.banking_transactions_model:
                 txn[BankingTransactionsCols.INCLUDE] = False
 
-
-    def on_bank_accountholder_changed(self,entry):
-        self.conf.set_string(GCSocietyApp.ACCOUNTHOLDER_KEY,entry.get_text())
-
-    def on_bank_accountnumber_changed(self,entry):
-        try:
-            num = int(entry.get_text())
-            self.conf.set_int(GCSocietyApp.ACCOUNTNUMBER_KEY,num)
-        except:
-            entry.set_text('')
 
     def on_clieopfile_select(self,button):
         e = self.banking_clieopfile_entry
